@@ -6,3 +6,6 @@ langchain-core
 python-dotenv
 requests
 python-multipart
+reportlab
+weasyprint
+jinja2
