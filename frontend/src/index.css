@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Futuristic color palette */
+    --cyber-black: 0 0% 0%;
+    --carbon: 0 0% 6.7%;
+    --carbon-light: 0 0% 10%;
+    --neon-teal: 184 100% 50%;
+    --neon-teal-glow: 184 100% 60%;
+    --holo-purple: 261 63% 74%;
+    --holo-purple-glow: 261 73% 84%;
+    --neon-red: 0 100% 60%;
+    --neon-orange: 30 100% 60%;
+    --neon-blue: 210 100% 60%;
+    
+    /* Semantic tokens */
+    --background: var(--cyber-black);
+    --foreground: 0 0% 95%;
+    
+    --card: var(--carbon);
+    --card-foreground: 0 0% 95%;
+    
+    --primary: var(--neon-teal);
+    --primary-foreground: var(--cyber-black);
+    --primary-glow: var(--neon-teal-glow);
+    
+    --secondary: var(--holo-purple);
+    --secondary-foreground: var(--cyber-black);
+    --secondary-glow: var(--holo-purple-glow);
+    
+    --accent: var(--carbon-light);
+    --accent-foreground: var(--neon-teal);
+    
+    --muted: var(--carbon);
+    --muted-foreground: 0 0% 60%;
+    
+    --border: 0 0% 15%;
+    --input: var(--carbon-light);
+    --ring: var(--neon-teal);
+    
+    --destructive: var(--neon-red);
+    --warning: var(--neon-orange);
+    --info: var(--neon-blue);
+    
+    --radius: 0.25rem;
+    
+    /* Glassmorphism */
+    --glass-bg: 0 0% 10% / 0.4;
+    --glass-border: 0 0% 100% / 0.1;
+    
+    /* Glow effects */
+    --glow-sm: 0 0 10px hsl(var(--neon-teal) / 0.5);
+    --glow-md: 0 0 20px hsl(var(--neon-teal) / 0.4);
+    --glow-lg: 0 0 40px hsl(var(--neon-teal) / 0.3);
+    --glow-purple-sm: 0 0 10px hsl(var(--holo-purple) / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  /* Scanline effect */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 246, 255, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 246, 255, 0.03) 3px
+    );
+    z-index: 9999;
+    opacity: 0.3;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism utilities */
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+  
+  .glass-strong {
+    background: hsl(0 0% 8% / 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(0 0% 100% / 0.15);
+  }
+  
+  /* Neon glow effects */
+  .glow-teal {
+    box-shadow: var(--glow-sm);
+  }
+  
+  .glow-teal-md {
+    box-shadow: var(--glow-md);
+  }
+  
+  .glow-teal-lg {
+    box-shadow: var(--glow-lg);
+  }
+  
+  .glow-purple {
+    box-shadow: var(--glow-purple-sm);
+  }
+  
+  .text-glow-teal {
+    text-shadow: 0 0 10px hsl(var(--neon-teal) / 0.6),
+                 0 0 20px hsl(var(--neon-teal) / 0.4);
+  }
+  
+  .text-glow-purple {
+    text-shadow: 0 0 10px hsl(var(--holo-purple) / 0.6),
+                 0 0 20px hsl(var(--holo-purple) / 0.4);
+  }
+  
+  /* Holographic border effect */
+  .holo-border {
+    position: relative;
+    border: 1px solid transparent;
+    background: linear-gradient(var(--carbon), var(--carbon)) padding-box,
+                linear-gradient(135deg, 
+                  hsl(var(--neon-teal) / 0.5), 
+                  hsl(var(--holo-purple) / 0.5)) border-box;
+  }
+  
+  /* Circuit line animation */
+  .circuit-line {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .circuit-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(var(--neon-teal)), 
+      transparent);
+    animation: circuit-flow 3s linear infinite;
+  }
+  
+  @keyframes circuit-flow {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  
+  /* Pulse animation */
+  .pulse-teal {
+    animation: pulse-teal 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-teal {
+    0%, 100% { 
+      box-shadow: 0 0 5px hsl(var(--neon-teal) / 0.4);
+    }
+    50% { 
+      box-shadow: 0 0 20px hsl(var(--neon-teal) / 0.6),
+                  0 0 40px hsl(var(--neon-teal) / 0.3);
+    }
+  }
+  
+  /* Hover glow effect */
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px hsl(var(--neon-teal) / 0.5),
+                0 0 40px hsl(var(--neon-teal) / 0.3),
+                inset 0 0 10px hsl(var(--neon-teal) / 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
