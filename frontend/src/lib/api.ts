@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://huggingface.co/spaces/abhi02072005/PR_review';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://abhi02072005-pr-review.hf.space';
 
 export interface PRReviewRequest {
   github_url?: string;
